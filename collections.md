@@ -119,6 +119,29 @@ Return codes:
 * 200 OK - if the operation succeed
 * 400 Bad Request - if the uuid parameter is missing or invalid
 
+#### findAuthorizedAndMetadata
+**/api/core/collections/search/findAuthorizedAndMetadata?metadata=<:metadatafield>&metadatavalue=<:metadatavalue>**
+
+The supported parameters are:
+* page, size [see pagination](README.md#Pagination)
+* metadata: mandatory, the metadata field the collection must have
+* metadatavalue: optional, rhe metadata's value the collection must have (if specified)
+
+It returns the list of collections where the current user is authorized to submit and has the metadata; in case the
+metadavalue is specified, the metadata's value must match
+
+eg:
+/api/core/collections/search/findAuthorizedAndMetadata?metadata=relationship.type
+retrieve all authorized collections where the current user is authorized to submit and have the relationship.type
+metadata
+
+/api/core/collections/search/findAuthorizedAndMetadata?metadata=relationship.type&metadatavalue=Publication
+retrieve all authorized collections where the current user is authorized to submit and have the relationship.type
+metadata and the value of relationship.type is 'Publication'
+
+Return codes:
+* 200 OK - if the operation succeed
+
 ## Patch operations
 
 Collection metadata can be modified as described in [Modifying metadata via Patch](metadata-patch.md).
