@@ -119,11 +119,13 @@ Return codes:
 * 200 OK - if the operation succeed
 * 400 Bad Request - if the uuid parameter is missing or invalid
 
-#### findAuthorizedAndMetadata
-**/api/core/collections/search/findAuthorizedAndMetadata?metadata=<:metadatafield>&metadatavalue=<:metadatavalue>**
+#### findAuthorizedByCommunityAndMetadata
+**/api/core/collections/search/findAuthorizedAndMetadata?uuid=<:uuid>&metadata=<:metadatafield>&metadatavalue
+=<:metadatavalue>**
 
 The supported parameters are:
 * page, size [see pagination](README.md#Pagination)
+* uuid: mandatory, the uuid of the community
 * metadata: mandatory, the metadata field the collection must have
 * metadatavalue: optional, rhe metadata's value the collection must have (if specified)
 
@@ -131,12 +133,15 @@ It returns the list of collections where the current user is authorized to submi
 metadavalue is specified, the metadata's value must match
 
 eg:
-/api/core/collections/search/findAuthorizedAndMetadata?metadata=relationship.type
-retrieve all authorized collections where the current user is authorized to submit and have the relationship.type
+/api/core/collections/search/findAuthorizedByCommunityAndMetadata?uuid=<:uuid>&metadata=relationship.type
+It returns all direct children collection of the community where the current user is authorized to submit and have the
+relationship
+.type
 metadata
 
-/api/core/collections/search/findAuthorizedAndMetadata?metadata=relationship.type&metadatavalue=Publication
-retrieve all authorized collections where the current user is authorized to submit and have the relationship.type
+/api/core/collections/search/findAuthorizedByCommunityAndMetadata?uuid=<:uuid>&metadata=relationship
+.type&metadatavalue=Publication
+retrieve all direct children collection of the community where the current user is authorized to submit and have the relationship.type
 metadata and the value of relationship.type is 'Publication'
 
 Return codes:
